@@ -1,3 +1,6 @@
+function mostrar2_1() {
+    
+}
 function calcular2_1(E, Q, d) {
     equacao_padrao = `\\[E = \\frac{K \\cdot Q}{d^2}\\]`
     document.querySelector(".equacao_usada").innerHTML = equacao_padrao
@@ -20,8 +23,19 @@ function calcular2_1(E, Q, d) {
     }
 }
 
-calcular2_1(4, 4, null)
+function calcular2_2() {
 
+}
+function calcular2_3() {
+    
+}
+
+document.querySelector("#selecionar_sistema").addEventListener("onchange", () => {
+    selecao = document.querySelector("#selecionar_sistema").value
+    if (selecao == 1) {
+        mostrar2_1()
+    }
+})
 function converterParaNotacao10x(numero) {
     let notacaoCientifica = numero.toExponential().split('e');
     let base = parseFloat(notacaoCientifica[0]);
