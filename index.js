@@ -71,7 +71,11 @@ function calcular2_1(selecao) {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
-function calcular2_2(d, x, q1, q2) {
+function calcular2_2() {
+    let q1 = parseInt(document.querySelector("#entrada_q1_s2").value)
+    let q2 = parseInt(document.querySelector("#entrada_q2_s2").value)
+    let d = parseInt(document.querySelector("#entrada_d_s2").value)
+    let x = parseInt(document.querySelector("#entrada_x_s2").value)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}\\]`
     eq1 = `\\[\\overrightarrow{E_{q_1}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_1}{x^2}\\cdot î\\]` 
     eq2 = `\\[\\overrightarrow{E_{q_2}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_2}{(d - x)^2}\\cdot -î\\]` 
@@ -93,7 +97,12 @@ function calcular2_2(d, x, q1, q2) {
     }
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
-function calcular2_3(a, b, c, q1, q2) {
+function calcular2_3() {
+    let q1 = parseInt(document.querySelector("#entrada_q1_s3").value)
+    let q2 = parseInt(document.querySelector("#entrada_q2_s3").value)
+    let a = parseInt(document.querySelector("#entrada_a_s3").value)
+    let b = parseInt(document.querySelector("#entrada_b_s3").value)
+    let c = parseInt(document.querySelector("#entrada_c_s3").value)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}\\]`
     eq1 = `\\[\\overrightarrow{E_{q_1}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_1}{a^2}\\{sen[cos^{-1}(\\frac{b}{2a})]ĵ + \\frac{b}{2a}î\\}\\]`
     eq2 = `\\[\\overrightarrow{E_{q_1}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_1}{c^2}\\{sen[cos^{-1}(\\frac{b}{2a})]ĵ - \\frac{b}{2a}î\\}\\]`
@@ -104,6 +113,7 @@ function calcular2_3(a, b, c, q1, q2) {
     document.querySelector(".resultado_completo").innerHTML += equacao_p
     if (a != null && b != null && c != null && q1 != null && q2 != null) {
         Ep_i = (1/(4*Math.PI*8.85*(Math.pow(10,-12))))*(((q1/a^2)-(q2/c^2))*Math.sin(Math.acos(b/(2*a))))
+        console.log(Ep_i, q1, q2, Math.sin(Math.acos(b/(2*a))))
         Ep_j = (1/(4*Math.PI*8.85*(Math.pow(10,-12))))*(((q1/a^2)+(q2/c^2))*Math.sin(Math.acos(b/(2*a))))
         document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0}\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot sen[cos^{-1}(\\frac{${b}}{${2*a}})]ĵ + (\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot \\frac{${b}}{${2*a}}î\\}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0}\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot sen[cos^{-1}(\\frac{${b}}{${2*a}})]ĵ + \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0}\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot \\frac{${b}}{${2*a}}î\\}\\]`
@@ -116,7 +126,11 @@ function calcular2_3(a, b, c, q1, q2) {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
-function calcular2_4(q1, q2, q3, d) {
+function calcular2_4() {
+    let q1 = parseInt(document.querySelector("#entrada_q1_s4").value)
+    let q2 = parseInt(document.querySelector("#entrada_q2_s4").value)
+    let q3 = parseInt(document.querySelector("#entrada_q3_s4").value)
+    let d = parseInt(document.querySelector("#entrada_d_s4").value)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}+\\overrightarrow{E_3}\\]`
     eq1 = `\\[\\overrightarrow{E_{q_1}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_1}{d^2} \\cdot (-î)\\]`
     eq2 = `\\[\\overrightarrow{E_{q_2}} = \\frac{1}{4 \\cdot \\pi \\cdot \\epsilon_0} \\cdot \\frac{q_2}{2d^2} (\\frac{-\\sqrt{2}}{2}î - \\frac{-\\sqrt{2}}{2}ĵ)\\]`

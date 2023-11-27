@@ -48,7 +48,7 @@ body {
 
 .buttons {
     background-color: #8E12DF;
-    width: auto;
+    width: 250px;
     border-radius: 8px;
     display:flex;
     flex-direction: column;
