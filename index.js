@@ -188,22 +188,6 @@ function converterParaNotacao10x(numero) {
     return `${base.toFixed(2)} ⋅ 10^{${expoente}}`;
 }
 
-// function calcularSistemas() {
-//     selecao = document.querySelector("#selecionar_sistema").value
-//     if (selecao == 1) {
-//         // calcular2_1()
-//     } else if (selecao == 2) {
-//         d = document.querySelector("#entrada_d").value
-//         x = document.querySelector("#entrada_x").value
-//         q1 = document.querySelector("#entrada_q1").value
-//         q2 = document.querySelector("#entrada_q2").value
-//         console.log(d, x, q1, q2)
-//         // calcular2_2()
-//     } else if (selecao == 3) {
-//     } else if (selecao == 4) {
-//     }
-// }
-
 function mostrarCalculos() {
     document.querySelector(".resultado_completo").style.display = "block"
 }
