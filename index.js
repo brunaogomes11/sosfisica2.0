@@ -156,6 +156,7 @@ function calcular2_4() {
 function selecionarSistema(selecao) {
     document.querySelector(".resultado_resumido").innerHTML= ""
     document.querySelector(".resultado_completo").innerHTML = ""
+    document.querySelector(".resultado_completo").style.display = "none"
     if (selecao == 1) {
         document.querySelector("#sistema2_1").style.display = "flex"
         document.querySelector("#sistema2_2").style.display = "none"
