@@ -64,7 +64,11 @@ body {
 }
 
 .resultados {
-    grid-area: resultados;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .resultado_completo {
