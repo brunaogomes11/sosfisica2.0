@@ -11,6 +11,14 @@ body {
     overflow-x: hidden;
 }
 
+#voltarPaginaInicial {
+    position: absolute;
+    top: 0; left: 0;
+    margin: 20px;
+    width: 10%;
+    text-decoration: none;
+}
+
 .containerPrincipalSistemas {
     width: 100%;
     display:flex;
