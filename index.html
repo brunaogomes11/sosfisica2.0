@@ -19,18 +19,28 @@
         </div>
         <!-- Sistema 1 -->
         <div class="sistemas" id="sistema2_1">
-            <select id="selecionar_variavel_achar">
-                <option value=null>Selecione o tipo de variável desejada</option>
-                <option value="E">E - Campo Elétrico</option>
-                <option value="Q">Q - Carga Elétrica</option>
-                <option value="d">d - Distância</option>
-            </select>
-            <div class="campos_entrada" id="campos_entrada1">
-                
+            <div class="sistemaInfo">
+                <span class="titulo">Sistema 2.1</span>
+                <img src="./imgs/sistema21.png" class="imagemSistema">
+            </div>
+            <div class="entradas">
+                <select id="selecionar_variavel_achar">
+                    <option value=null>Selecione o tipo de variável desejada</option>
+                    <option value="E">E - Campo Elétrico</option>
+                    <option value="Q">Q - Carga Elétrica</option>
+                    <option value="d">d - Distância</option>
+                </select>
+                <div class="campos_entrada" id="campos_entrada1">
+                    
+                </div>
             </div>
         </div>
         <!-- Sistema 2 -->
         <div class="sistemas" id="sistema2_2">
+            <div class="sistemaInfo">
+                <span class="titulo">Sistema 2.2</span>
+                <img src="./imgs/sistema22.png" class="imagemSistema">
+            </div>
             <div class="campos_entrada">
                 <span>\(d\) - Distância entre as cargas</span>
                 <input class="entradaNumeros" id="entrada_d_s2" name="entrada_d" type="number" start=0 />
@@ -45,6 +55,10 @@
         </div>
         <!-- Sistema 3 -->
         <div class="sistemas" id="sistema2_3">
+            <div class="sistemaInfo">
+                <span class="titulo">Sistema 2.3</span>
+                <img src="./imgs/sistema23.png" class="imagemSistema">
+            </div>
             <div class="campos_entrada">
                 <span>\(a\) - Distância entre as cargas</span>
                 <input class="entradaNumeros" id="entrada_a_s3" name="entrada_a" type="number" start=0 />
@@ -61,6 +75,10 @@
         </div>
         <!-- Sistema 4 -->
         <div class="sistemas" id="sistema2_4">
+            <div class="sistemaInfo">
+                <span class="titulo">Sistema 2.4</span>
+                <img src="./imgs/sistema24.png" class="imagemSistema">
+            </div>
             <div class="campos_entrada">
                 <span>\(d\) - Distância entre as cargas</span>
                 <input class="entradaNumeros" id="entrada_d_s4" name="entrada_d" type="number" start=0 />
@@ -78,7 +96,6 @@
             <span class="resultado_completo"></span>
         </div>
     </div>
-    <!-- <iframe id="modalSistemaInfo" src="./explicacaoSistemas/templates/sistema2_1.html" frameborder="0"></iframe> -->
     <script src="index.js" ></script>
 </body>
 </html>

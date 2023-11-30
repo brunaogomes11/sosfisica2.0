@@ -45,9 +45,9 @@ body {
 
 .sistemas {
     display: none;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center; 
+    align-items: flex-start; 
 }
 
 .campos_entrada {
@@ -122,15 +122,21 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 
-/* Modal */
-#modalSistemaInfo {
+.sistemaInfo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    /* display: none; */
-    top: 0;
+    margin: 20px;
+}
+
+.titulo {
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+.imagemSistema {
+    width: 25vw;
+    border: 2px dashed #8E12DF;
+    border-radius: 10px;
 }
