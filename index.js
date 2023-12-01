@@ -88,7 +88,6 @@ function calcular2_2() {
     document.querySelector(".resultado_completo").innerHTML += equacao_p_substituida1
     document.querySelector(".resultado_completo").innerHTML += equacao_p_substituida2
     if (!isNaN(d) && !isNaN(x) && !isNaN(q1) && !isNaN(q2)) {
-        console.log(q1/(Math.pow(x,2)), q2/((d-x)^2), (d-x)^2)
         E_p = (K)*((q1/(Math.pow(x,2)))-(q2/((d-x)^2)))
         document.querySelector(".resultado_completo").innerHTML += `\\[E_p = K \\cdot (\\frac{${q1}}{${x}^2} - \\frac{${q2}}{(${d} - ${x})^2})\\cdot î\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[E_p = ${converterParaNotacao10x(E_p)} N/m\\]`
@@ -105,27 +104,24 @@ function calcular2_3() {
     let a = parseFloat(document.querySelector("#entrada_a_s3").value)
     let b = parseFloat(document.querySelector("#entrada_b_s3").value)
     let c = parseFloat(document.querySelector("#entrada_c_s3").value)
-    equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}\\]`
-    eq1 = `\\[\\overrightarrow{E_{q_1}} = K \\cdot \\frac{q_1}{a^2}\\{sen[cos^{-1}(\\frac{b}{2a})]ĵ + \\frac{b}{2a}î\\}\\]`
-    eq2 = `\\[\\overrightarrow{E_{q_1}} = K \\cdot \\frac{q_1}{c^2}\\{sen[cos^{-1}(\\frac{b}{2a})]ĵ - \\frac{b}{2a}î\\}\\]`
-    equacao_p = `\\[\\overrightarrow{E_p} = K\\{(\\frac{q_1}{a^2}+\\frac{q_2}{c^2})\\cdot sen[cos^{-1}(\\frac{b}{2a})]ĵ + (\\frac{q_1}{a^2}+\\frac{q_2}{c^2})\\cdot \\frac{b}{2a}î\\}\\]`
+    let angulo = parseFloat(document.querySelector("#entrada_alpha_s3").value)
+    equacao_p_total = `\\[E_p = \\sqrt{E_1^2 + E_2^2 + 2 \\cdot E_1 \\cdot E_2 \\cdot cos \\alpha}\\]`
+    eq1 =  `\\[E_{q_1} = \\frac{K \\cdot q_1}{a^2}\\]`
+    eq2 = `\\[E_{q_2} = \\frac{K \\cdot q_2}{${c}^2}\\]`
+    equacao_p = `\\[E_p = \\sqrt{\\frac{K \\cdot q_1}{a^2}+\\frac{K \\cdot q_2}{c^2}+ 2 \\cdot \\frac{K \\cdot q_1}{a^2} \\cdot \\frac{K \\cdot q_2}{c^2}\\cdot cos \\alpha\\}}\\]`
     document.querySelector(".resultado_completo").innerHTML = equacao_p_total
     document.querySelector(".resultado_completo").innerHTML += eq1
     document.querySelector(".resultado_completo").innerHTML += eq2
     document.querySelector(".resultado_completo").innerHTML += equacao_p
-    if (!isNaN(a) && !isNaN(b) && !isNaN(c) && !isNaN(q1) && !isNaN(q2)) {
-        Ep_i = (K)*(((q1/Math.pow(a,2))-(q2/c^2))*Math.sin(Math.acos(b/(2*a))))
-        console.log(Ep_i, q1, q2, Math.sin(Math.acos(b/(2*a))))
-        Ep_j = (K)*(((q1/Math.pow(a,2))+(q2/c^2))*Math.sin(Math.acos(b/(2*a))))
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  K\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot sen[cos^{-1}(\\frac{${b}}{${2*a}})]ĵ + (\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot \\frac{${b}}{${2*a}}î\\}\\]`
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  K\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot sen[cos^{-1}(\\frac{${b}}{${2*a}})]ĵ + K\\{(\\frac{${q1}}{${a}^2}+\\frac{${q2}}{${c}^2})\\cdot \\frac{${b}}{${2*a}}î\\}\\]`
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML = `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
-        Ep = Math.sqrt(Math.pow(Ep_i, 2) + Math.pow(Ep_j, 2))
+    if (!isNaN(a) && !isNaN(b) && !isNaN(c) && !isNaN(angulo) && !isNaN(q1) && !isNaN(q2) && angulo > 0 && a > 0 && b > 0 && c > 0) {
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = \\sqrt{\\frac{K \\cdot {${q1}}}{${a}^2}+\\frac{K \\cdot ${q2}}{${c}^2}+ 2 \\cdot \\frac{K \\cdot {${q1}}}{${a}^2} \\cdot \\frac{K \\cdot ${q2}}{${c}^2}\\cdot cos ${angulo}\\}}\\]`
+        E1 = (K*q1)/(Math.pow(a, 2))
+        E2 = (K*q2)/(Math.pow(c, 2))
+        Ep = Math.sqrt(E1+E2+(2*E1*E2*Math.cos(angulo * (Math.PI/180))))
         document.querySelector(".resultado_resumido").innerHTML = `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
-        alert("Você esqueceu de algum campo")
+        alert("Campos inválidos")
     }
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
