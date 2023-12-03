@@ -45,43 +45,44 @@ function calcular2_1(selecao) {
     }
     equacao_padrao = `\\[E = \\frac{K \\cdot Q}{d^2}\\]`
     document.querySelector(".resultado_completo").innerHTML = equacao_padrao
-    if (E != '' && Q != '' && d == null) {
+    if (E != '' && Q != '' && d == null && Math.sign(Q) == Math.sign(E)) {
         d = Math.sqrt((K*Q)/E)
         document.querySelector(".resultado_completo").innerHTML += `\\[d = \\sqrt{\\frac{K \\cdot Q}{E}}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[d = \\sqrt{\\frac{8.99 \\cdot 10^9 \\cdot ${Q}}{${E}}}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[d = ${converterParaNotacao10x(d)} N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[d = ${converterParaNotacao10x(d)} N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else if (E == null && Q != '' && d != '') {
         E = (K*Q)/(Math.pow(d, 2))
         document.querySelector(".resultado_completo").innerHTML += `\\[E = \\frac{8.99 \\cdot 10^9 \\cdot ${Q}}{${d}^2}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[E = \\frac{${K*Q}}{${Math.pow(d,2)}}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[E = ${converterParaNotacao10x(E)} N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[E = ${converterParaNotacao10x(E)} N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else if (E != '' && Q == null && d != '') {
         Q = (E*(Math.pow(d, 2))/K)
         document.querySelector(".resultado_completo").innerHTML += `\\[Q = \\frac{E \\cdot d^2}{8.99 \\cdot 10^9}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[Q = \\frac{${E} \\cdot ${d}^2}{8.99 \\cdot 10^9}\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[Q = ${converterParaNotacao10x(Q)} N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[Q = ${converterParaNotacao10x(Q)} N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
-        alert("Você esqueceu de algum campo")
+        alert("Campos Inválidos")
     }
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 
 function calcular2_2() {
-    let q1 = parseFloat(document.querySelector("#entrada_q1_s2").value)
-    let q2 = parseFloat(document.querySelector("#entrada_q2_s2").value)
-    let d = parseFloat(document.querySelector("#entrada_d_s2").value)
-    let x = parseFloat(document.querySelector("#entrada_x_s2").value)
+    let q1 = document.querySelector("#tipo_entrada_q1_s2").value == 'C' ? parseFloat(document.querySelector("#entrada_q1_s2").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q1_s2").value, document.querySelector("#entrada_q1_s2").value)
+    let q2 = document.querySelector("#tipo_entrada_q2_s2").value == 'C' ? parseFloat(document.querySelector("#entrada_q2_s2").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q2_s2").value, document.querySelector("#entrada_q2_s2").value)
+    let d = document.querySelector("#tipo_entrada_d_s2").value == 'm' ? parseFloat(document.querySelector("#entrada_d_s2").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_d_s2").value, document.querySelector("#entrada_d_s2").value)
+    let x = document.querySelector("#tipo_entrada_x_s2").value == 'm' ? parseFloat(document.querySelector("#entrada_x_s2").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_x_s2").value, document.querySelector("#entrada_x_s2").value)
+    console.log(q1, q2, d, x)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}\\]`
     eq1 = `\\[\\overrightarrow{E_{q_1}} = K \\cdot \\frac{q_1}{x^2}\\cdot î\\]` 
     eq2 = `\\[\\overrightarrow{E_{q_2}} = K \\cdot \\frac{q_2}{(d - x)^2}\\cdot -î\\]` 
-    equacao_p_substituida1 = `\\[E_p = (K \\cdot \\frac{q_1}{x^2} - K \\cdot \\frac{q_2}{(d - x)^2})\\cdot î\\]`
-    equacao_p_substituida2 = `\\[E_p = K \\cdot (\\frac{q_1}{x^2} - \\frac{q_2}{(d - x)^2})\\cdot î\\]`
+    equacao_p_substituida1 = `\\[\\overrightarrow{E_p} = (K \\cdot \\frac{q_1}{x^2} - K \\cdot \\frac{q_2}{(d - x)^2})\\cdot î\\]`
+    equacao_p_substituida2 = `\\[\\overrightarrow{E_p} = K \\cdot (\\frac{q_1}{x^2} - \\frac{q_2}{(d - x)^2})\\cdot î\\]`
     document.querySelector(".resultado_completo").innerHTML = equacao_p_total
     document.querySelector(".resultado_completo").innerHTML += eq1
     document.querySelector(".resultado_completo").innerHTML += eq2
@@ -89,37 +90,40 @@ function calcular2_2() {
     document.querySelector(".resultado_completo").innerHTML += equacao_p_substituida2
     if (!isNaN(d) && !isNaN(x) && !isNaN(q1) && !isNaN(q2)) {
         E_p = (K)*((q1/(Math.pow(x,2)))-(q2/((d-x)^2)))
-        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = K \\cdot (\\frac{${q1}}{${x}^2} - \\frac{${q2}}{(${d} - ${x})^2})\\cdot î\\]`
-        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = ${converterParaNotacao10x(E_p)} N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML = `\\[E_p = ${converterParaNotacao10x(E_p)} N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = K \\cdot (\\frac{${q1}}{${x}^2} - \\frac{${q2}}{(${d} - ${x})^2})\\cdot î\\]`
+        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(E_p)}\\cdot î \\ N/m\\]`
+        document.querySelector(".resultado_resumido").innerHTML = `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(E_p)}\\cdot î \\ N/m\\]`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
-        alert("Você esqueceu de algum campo")
+        alert("Campos inválidos")
     }
     MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 }
 function calcular2_3() {
-    let q1 = parseFloat(document.querySelector("#entrada_q1_s3").value)
-    let q2 = parseFloat(document.querySelector("#entrada_q2_s3").value)
-    let a = parseFloat(document.querySelector("#entrada_a_s3").value)
-    let b = parseFloat(document.querySelector("#entrada_b_s3").value)
-    let c = parseFloat(document.querySelector("#entrada_c_s3").value)
+    let q1 = document.querySelector("#tipo_entrada_q1_s3").value == 'C' ? parseFloat(document.querySelector("#entrada_q1_s3").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q1_s3").value, document.querySelector("#entrada_q1_s3").value)
+    console.log(q1, document.querySelector("#tipo_entrada_q1_s3").value)
+    let q2 = document.querySelector("#tipo_entrada_q2_s3").value == 'C' ? parseFloat(document.querySelector("#entrada_q2_s3").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q2_s3").value, document.querySelector("#entrada_q2_s3").value)
+    let a = document.querySelector("#tipo_entrada_a_s3").value == 'm' ? parseFloat(document.querySelector("#entrada_a_s3").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_a_s3").value, document.querySelector("#entrada_a_s3").value)
+    let b = document.querySelector("#tipo_entrada_b_s3").value == 'm' ? parseFloat(document.querySelector("#entrada_b_s3").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_b_s3").value, document.querySelector("#entrada_b_s3").value)
+    let c = document.querySelector("#tipo_entrada_c_s3").value == 'm' ? parseFloat(document.querySelector("#entrada_c_s3").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_c_s3").value, document.querySelector("#entrada_c_s3").value)
     let angulo = parseFloat(document.querySelector("#entrada_alpha_s3").value)
     equacao_p_total = `\\[E_p = \\sqrt{E_1^2 + E_2^2 + 2 \\cdot E_1 \\cdot E_2 \\cdot cos \\alpha}\\]`
     eq1 =  `\\[E_{q_1} = \\frac{K \\cdot q_1}{a^2}\\]`
     eq2 = `\\[E_{q_2} = \\frac{K \\cdot q_2}{${c}^2}\\]`
-    equacao_p = `\\[E_p = \\sqrt{\\frac{K \\cdot q_1}{a^2}+\\frac{K \\cdot q_2}{c^2}+ 2 \\cdot \\frac{K \\cdot q_1}{a^2} \\cdot \\frac{K \\cdot q_2}{c^2}\\cdot cos \\alpha\\}}\\]`
+    equacao_p = `\\[E_p = \\sqrt{(\\frac{K \\cdot q_1}{a^2})^2+(\\frac{K \\cdot q_2}{c^2})^2+ 2 \\cdot \\frac{K \\cdot q_1}{a^2} \\cdot \\frac{K \\cdot q_2}{c^2}\\cdot cos \\alpha\\}}\\]`
     document.querySelector(".resultado_completo").innerHTML = equacao_p_total
     document.querySelector(".resultado_completo").innerHTML += eq1
     document.querySelector(".resultado_completo").innerHTML += eq2
     document.querySelector(".resultado_completo").innerHTML += equacao_p
     if (!isNaN(a) && !isNaN(b) && !isNaN(c) && !isNaN(angulo) && !isNaN(q1) && !isNaN(q2) && angulo > 0 && a > 0 && b > 0 && c > 0) {
-        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = \\sqrt{\\frac{K \\cdot {${q1}}}{${a}^2}+\\frac{K \\cdot ${q2}}{${c}^2}+ 2 \\cdot \\frac{K \\cdot {${q1}}}{${a}^2} \\cdot \\frac{K \\cdot ${q2}}{${c}^2}\\cdot cos ${angulo}\\}}\\]`
         E1 = (K*q1)/(Math.pow(a, 2))
         E2 = (K*q2)/(Math.pow(c, 2))
-        Ep = Math.sqrt(E1+E2+(2*E1*E2*Math.cos(angulo * (Math.PI/180))))
+        Ep = Math.sqrt(Math.pow(E1, 2)+Math.pow(E2, 2)+(2*E1*E2*Math.cos(angulo * (Math.PI/180))))
+        q1 = converterParaNotacao10x(q1); q2 = converterParaNotacao10x(q2)
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = \\sqrt{(\\frac{K \\cdot {${q1}}}{${a}^2})^2+(\\frac{K \\cdot ${q2}}{${c}^2})^2+ 2 \\cdot \\frac{K \\cdot {${q1}}}{${a}^2} \\cdot \\frac{K \\cdot ${q2}}{${c}^2}\\cdot cos ${angulo}\\}}\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
         alert("Campos inválidos")
     }
@@ -150,7 +154,7 @@ function calcular2_4() {
         document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML += `<div class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
+        document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
         alert("Você esqueceu de algum campo")
     }
@@ -188,10 +192,19 @@ function converterParaNotacao10x(numero) {
     let notacaoCientifica = numero.toExponential().split('e');
     let base = parseFloat(notacaoCientifica[0]);
     let expoente = parseFloat(notacaoCientifica[1]);
-  
-    return `${base.toFixed(2)} ⋅ 10^{${expoente}}`;
+    if (expoente != 0) {
+        return `${base.toFixed(2)} ⋅ 10^{${expoente}}`;
+    } else {
+        return `${base.toFixed(2)}`
+    }
 }
 
 function mostrarCalculos() {
-    document.querySelector(".resultado_completo").style.display = "block"
+    if (document.querySelector(".resultado_completo").style.display == "none") {
+        document.querySelector(".resultado_completo").style.display = "block"
+        document.querySelector("#mostrarButton").innerHTML = 'Ocultar Cálculos'
+    } else {
+        document.querySelector(".resultado_completo").style.display = "none"
+        document.querySelector("#mostrarButton").innerHTML = 'Mostrar Cálculos'
+    }
 }

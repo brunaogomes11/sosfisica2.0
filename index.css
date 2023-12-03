@@ -109,10 +109,26 @@ body::-webkit-scrollbar-thumb {
     padding-left: 10px;
     text-align: center;
 }
+.entradasContainer {
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+.tipoInput {
+    width: auto;
+    border-radius: 7px;
+    padding: 5px;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: 'Quantico', sans-serif;
+    text-align: center;
+}
 
 .entradaNumeros {
     width: 300px;
     height: 30px;
+    border: 0;
     border-radius: 7px;
     text-align: center;
 }
@@ -139,4 +155,4 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 25vw;
     border: 2px dashed #8E12DF;
     border-radius: 10px;
-}
+} 

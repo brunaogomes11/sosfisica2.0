@@ -43,13 +43,45 @@
             </div>
             <div class="campos_entrada">
                 <span>\(d\) - Distância entre as cargas</span>
-                <input class="entradaNumeros" id="entrada_d_s2" name="entrada_d" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_d_s2" name="entrada_d" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_d_s2">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div> 
                 <span>\(x\) - Distância entre a carga 1 até o ponto P</span>
-                <input class="entradaNumeros" id="entrada_x_s2" name="entrada_x" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_x_s2" name="entrada_x" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_x_s2">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div>    
                 <span>\(Q_1\) - Carga elétrica</span>
-                <input class="entradaNumeros" id="entrada_q1_s2" name="entrada_q1" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q1_s2" name="entrada_q1" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q1_s2">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
                 <span>\(Q_2\) - Carga elétrica</span>
-                <input class="entradaNumeros" id="entrada_q2_s2" name="entrada_q2" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q2_s2" name="entrada_q2" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q2_s2">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
                 <div class="buttons" onclick="calcular2_2()">Calcular</div>
             </div>
         </div>
@@ -61,17 +93,56 @@
             </div>
             <div class="campos_entrada">
                 <span>\(a\) - Distância entre a carga 1 até o ponto P</span>
-                <input class="entradaNumeros" id="entrada_a_s3" name="entrada_a" type="number" start=0 />
-                <span>\(b\) - Distância entre a carga 2 até o ponto P</span>
-                <input class="entradaNumeros" id="entrada_b_s3" name="entrada_b" type="number" start=0 />
-                <span>\(c\) - Distância entre as cargas</span>
-                <input class="entradaNumeros" id="entrada_c_s3" name="entrada_c" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_a_s3" name="entrada_a" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_a_s3">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div>                
+                <span>\(b\) - Distância entre as cargas</span>
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_b_s3" name="entrada_b" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_b_s3">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div>
+                <span>\(c\) - Distância entre a carga 2 até o ponto P</span>
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_c_s3" name="entrada_c" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_c_s3">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div>
                 <span>\(\alpha\) - Ângulo formado em P (Em °)</span>
                 <input class="entradaNumeros" id="entrada_alpha_s3" name="entrada_alpha" type="number" start=0 />
                 <span>\(Q_1\) - Carga elétrica</span>
-                <input class="entradaNumeros" id="entrada_q1_s3" name="entrada_q1" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q1_s3" name="entrada_q1" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q1_s3">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
                 <span>\(Q_2\) - Carga elétrica</span>
-                <input class="entradaNumeros" id="entrada_q2_s3" name="entrada_q2" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q2_s3" name="entrada_q2" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q2_s3">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
                 <div class="buttons" onclick="calcular2_3()">Calcular</div>
             </div>
         </div>
@@ -99,5 +170,6 @@
         </div>
     </div>
     <script src="index.js" ></script>
+    <script src="conversor.js" ></script>
 </body>
 </html>
