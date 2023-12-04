@@ -154,13 +154,47 @@
             </div>
             <div class="campos_entrada">
                 <span>\(d\) - Distância entre as cargas</span>
-                <input class="entradaNumeros" id="entrada_d_s4" name="entrada_d" type="number" start=0 />
-                <span>\(Q_1\) - Carga elétrica 1</span>
-                <input class="entradaNumeros" id="entrada_q1_s4" name="entrada_q1" type="number" start=0 />
-                <span>\(Q_2\) - Carga elétrica 2</span>
-                <input class="entradaNumeros" id="entrada_q2_s4" name="entrada_q2" type="number" start=0 />
-                <span>\(Q_3\) - Carga elétrica 3</span>
-                <input class="entradaNumeros" id="entrada_q3_s4" name="entrada_q3" type="number" start=0 />
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_d_s4" name="entrada_d" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_d_s4">
+                        <option value="m">m</option>
+                        <option value="cm">cm</option>
+                        <option value="mm">mm</option>
+                    </select>
+                </div>    
+                <span>\(Q_1\) - Carga elétrica</span>
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q1_s4" name="entrada_q1" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q1_s4">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
+                <span>\(Q_2\) - Carga elétrica</span>
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q2_s4" name="entrada_q2" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q2_s4">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
+                <span>\(Q_3\) - Carga elétrica</span>
+                <div class="entradasContainer">
+                    <input class="entradaNumeros" id="entrada_q3_s4" name="entrada_q2" type="number" start=0 />
+                    <select class="tipoInput" id="tipo_entrada_q3_s4">
+                        <option value="C">C</option>
+                        <option value="mC">mC</option>
+                        <option value="µC">µC</option>
+                        <option value="nC">nC</option>
+                        <option value="pC">pC</option>
+                    </select>
+                </div>
                 <div class="buttons" onclick="calcular2_4()">Calcular</div>
             </div>
         </div>
