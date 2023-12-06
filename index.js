@@ -110,7 +110,6 @@ function calcular2_2() {
     let q2 = document.querySelector("#tipo_entrada_q2_s2").value == 'C' ? parseFloat(document.querySelector("#entrada_q2_s2").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q2_s2").value, document.querySelector("#entrada_q2_s2").value)
     let d = document.querySelector("#tipo_entrada_d_s2").value == 'm' ? parseFloat(document.querySelector("#entrada_d_s2").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_d_s2").value, document.querySelector("#entrada_d_s2").value)
     let x = document.querySelector("#tipo_entrada_x_s2").value == 'm' ? parseFloat(document.querySelector("#entrada_x_s2").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_x_s2").value, document.querySelector("#entrada_x_s2").value)
-    console.log(q1, q2, d, x)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}\\]`
     eq1 = `\\[\\overrightarrow{E_{q_1}} = K \\cdot \\frac{q_1}{x^2}\\cdot î\\]` 
     eq2 = `\\[\\overrightarrow{E_{q_2}} = K \\cdot \\frac{q_2}{(d - x)^2}\\cdot -î\\]` 
@@ -121,8 +120,8 @@ function calcular2_2() {
     document.querySelector(".resultado_completo").innerHTML += eq2
     document.querySelector(".resultado_completo").innerHTML += equacao_p_substituida1
     document.querySelector(".resultado_completo").innerHTML += equacao_p_substituida2
-    if (!isNaN(d) && !isNaN(x) && !isNaN(q1) && !isNaN(q2)) {
-        E_p = (K)*((q1/(Math.pow(x,2)))-(q2/((d-x)^2)))
+    if (!isNaN(d) && !isNaN(x) && !isNaN(q1) && !isNaN(q2) && x < d) {
+        E_p = (K)*((q1/(Math.pow(x,2)))-(q2/(Math.pow((d-x), 2))))
         document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = K \\cdot (\\frac{${q1}}{${x}^2} - \\frac{${q2}}{(${d} - ${x})^2})\\cdot î\\]`
         document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(E_p)}\\cdot î \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(E_p)}\\cdot î \\ N/m\\]`
