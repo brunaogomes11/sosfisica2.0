@@ -168,23 +168,53 @@ function calcular2_4() {
     let q3 = document.querySelector("#tipo_entrada_q3_s4").value == 'C' ? parseFloat(document.querySelector("#entrada_q3_s4").value) : conversorCoulomb('C', document.querySelector("#tipo_entrada_q3_s4").value, document.querySelector("#entrada_q3_s4").value)
     let d = document.querySelector("#tipo_entrada_d_s4").value == 'm' ? parseFloat(document.querySelector("#entrada_d_s4").value) : conversorDistancia('m', document.querySelector("#tipo_entrada_d_s4").value, document.querySelector("#entrada_d_s4").value)
     equacao_p_total = `\\[\\overrightarrow{E_p} = \\overrightarrow{E_1}+\\overrightarrow{E_2}+\\overrightarrow{E_3}\\]`
-    eq1 = `\\[\\overrightarrow{E_{q_1}} = K \\cdot \\frac{q_1}{d^2} \\cdot (-î)\\]`
-    eq2 = `\\[\\overrightarrow{E_{q_2}} = K \\cdot \\frac{q_2}{2d^2} (\\frac{-\\sqrt{2}}{2}î - \\frac{-\\sqrt{2}}{2}ĵ)\\]`
-    eq3 = `\\[\\overrightarrow{E_{q_3}} = K \\cdot \\frac{q_3}{d^2} \\cdot (-ĵ)\\]`
-    equacao_p = `\\[\\overrightarrow{E_p} = K \\cdot [(\\frac{q_1}{d^2})+(\\frac{q_2}{2d^2} \\cdot \\frac{-\\sqrt{2}}{2})î + (\\frac{q_3}{d^2})+(\\frac{q_2}{2d^2} \\cdot \\frac{-\\sqrt{2}}{2})ĵ\\ ]\\]`
+    eq1 = `\\[E_1 = K \\cdot \\frac{q_1}{d^2}\\]`
+    eq2x = `\\[E_{2_x} = K \\cdot \\frac{q_2}{(d\\sqrt{2})^2}\\cdot cos 45° \\]`
+    eq2y = `\\[E_{2_y} = K \\cdot \\frac{q_2}{(d\\sqrt{2})^2}\\cdot sen 45° \\]`
+    eq3 = `\\[E_3 = K \\cdot \\frac{q_3}{d^2}\\]`
+    alpha = 45*(Math.PI / 180)
     document.querySelector(".resultado_completo").innerHTML = equacao_p_total
     document.querySelector(".resultado_completo").innerHTML += eq1
-    document.querySelector(".resultado_completo").innerHTML += eq2
+    document.querySelector(".resultado_completo").innerHTML += eq2x
+    document.querySelector(".resultado_completo").innerHTML += eq2y
     document.querySelector(".resultado_completo").innerHTML += eq3
-    document.querySelector(".resultado_completo").innerHTML += equacao_p
-    if (!isNaN(q1) && !isNaN(q2) && !isNaN(q3) && !isNaN(d)) {
-        Ep_i = (K)*((q1/Math.pow(d,2))+((q2/2*(Math.pow(d,2)))*(-(Math.sqrt(2)/2))))
-        Ep_j = (K)*((q3/Math.pow(d,2))+((q2/2*(Math.pow(d,2)))*(-(Math.sqrt(2)/2))))
-        Ep = Math.sqrt(Math.pow(Ep_i, 2) + Math.pow(Ep_j, 2))
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  K\\{(\\frac{q_1}{d^2})+(\\frac{q_2}{2d^2} \\cdot \\frac{-\\sqrt{2}}{2})î\\]`
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} =  K\\{(\\frac{q_3}{d^2})+(\\frac{q_2}{2d^2} \\cdot \\frac{-\\sqrt{2}}{2})ĵ\\]`
-        document.querySelector(".resultado_completo").innerHTML += `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
-        document.querySelector(".resultado_resumido").innerHTML = `\\[\\overrightarrow{E_p} = ${converterParaNotacao10x(Ep_i)}î + ${converterParaNotacao10x(Ep_j)}ĵ \\ N/m\\]`
+    if (!isNaN(q1) && !isNaN(q2) && !isNaN(q3) && !isNaN(d)) { 
+        E1 = (K*q1)/(Math.pow(d, 2))
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_1 = ${converterParaNotacao10x(E1)}\\]`
+        E3 = (K*q3)/(Math.pow(d, 2))
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_3 = ${converterParaNotacao10x(E3)}\\]`
+        E2x = ((K*q2)/(Math.pow((2*Math.sqrt(2)), 2)))*Math.cos(alpha)
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_{2_x} = ${converterParaNotacao10x(E2x)}\\]`
+        E2y = ((K*q2)/(Math.pow((2*Math.sqrt(2)), 2)))*Math.sin(alpha)
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_{2_y} = ${converterParaNotacao10x(E2y)}\\]`
+
+        if (Math.sign(q1) == Math.sign(q2) == Math.sign(q3)) {
+            Epx = E2x + E3
+            Epy = E2y + E1
+            document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E2x)}+${converterParaNotacao10x(E3)}\\]`
+            document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E2y)}+${converterParaNotacao10x(E1)}\\]`
+        } else if (Math.sign(q1) == Math.sign(q2) && Math.sign(q2) != Math.sign(q3)) { // q3 com sinal distindo do resto
+            Epx = E2x > E3 ? E2x - Math.abs(E3) : E3 - Math.abs(E2x)
+            Epy = E2y + E1
+            E2x > E3 ? document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E2x)}-${converterParaNotacao10x(Math.abs(E3))}\\]` : document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E3)}-${converterParaNotacao10x(Math.abs(E2x))}\\]`
+            document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E2y)}+${converterParaNotacao10x(E1)}\\]`
+        } else if (Math.sign(q1) == Math.sign(q3) && Math.sign(q2) != Math.sign(q3)) { // q2 com sinal distindo do resto
+            Epx = E2x > E3 ? E2x - Math.abs(E3) : E3 - Math.abs(E2x)
+            Epy = E2y > E1 ? E2y - Math.abs(E1) : E1 - Math.abs(E2y)
+            E2x > E3 ? document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E2x)}-${converterParaNotacao10x(Math.abs(E3))}\\]` : document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E3)}-${converterParaNotacao10x(Math.abs(E2x))}\\]`
+            E2y > E1 ? document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E2y)}-${converterParaNotacao10x(Math.abs(E1))}\\]`: document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E1)}-${converterParaNotacao10x(Math.abs(E2y))}\\]`
+        
+        } else if (Math.sign(q2) == Math.sign(q3) && Math.sign(q1) != Math.sign(q3)) { // q1 com sinal distindo do resto
+            Epx = E2x + E3
+            Epy = E2y > E1 ? E2y - Math.abs(E1) : E1 - Math.abs(E2y)
+            document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(E2x)}+${converterParaNotacao10x(E3)}\\]`
+            E2y > E1 ? document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E2y)}-${converterParaNotacao10x(Math.abs(E1))}\\]`: document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(E1)}-${converterParaNotacao10x(Math.abs(E2y))}\\]`
+        }
+        Ep = Math.sqrt(Math.pow(Epx, 2)+Math.pow(Epy, 2))
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_x} = ${converterParaNotacao10x(Epx)}\\]`
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_{p_y} = ${converterParaNotacao10x(Epy)}\\]`
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = \\sqrt{(${converterParaNotacao10x(Epx)})^2 + (${converterParaNotacao10x(Epy)})^2}\\]`
+        document.querySelector(".resultado_completo").innerHTML += `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML = `\\[E_p = ${converterParaNotacao10x(Ep)} \\ N/m\\]`
         document.querySelector(".resultado_resumido").innerHTML += `<div id="mostrarButton" class="buttons" onclick="mostrarCalculos()">Mostrar Cálculos</div>`
     } else {
